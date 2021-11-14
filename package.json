@@ -1,0 +1,23 @@
+{
+  "name": "crypto-premium-trader",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/potpiejimmy/crypto-premium-trader.git"
+  },
+  "author": "Thorsten Liese",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/potpiejimmy/crypto-premium-trader/issues"
+  },
+  "homepage": "https://github.com/potpiejimmy/crypto-premium-trader#readme",
+  "dependencies": {
+    "node-fetch": "^3.1.0"
+  }
+}

@@ -10,41 +10,37 @@ if (!DISCORD_CLIENT_ID || !DISCORD_CLIENT_SECRET || !DISCORD_CHANNEL_ID) {
     process.exit(1);
 }
 
-(async () => {
+let result = await fetch(DISCORD_API_ENDPOINT + "/oauth2/token", {
+    method: 'POST',
+    headers: {
+        "Authorization": "Basic " + Buffer.from(DISCORD_CLIENT_ID + ":" + DISCORD_CLIENT_SECRET).toString('base64'),
+        "Content-Type": "application/x-www-form-urlencoded"
+    },
+    body: new URLSearchParams({
+        'scope': 'identify connections messages.read',
+        'grant_type': 'client_credentials'
+    })
+});
 
-    let result = await fetch(DISCORD_API_ENDPOINT + "/oauth2/token", {
-        method: 'POST',
-        headers: {
-            "Authorization": "Basic " + Buffer.from(DISCORD_CLIENT_ID + ":" + DISCORD_CLIENT_SECRET).toString('base64'),
-            "Content-Type": "application/x-www-form-urlencoded"
-        },
-        body: new URLSearchParams({
-            'scope': 'identify connections messages.read',
-            'grant_type': 'client_credentials'
-        })
-    });
+let token = await result.json();
 
-    let token = await result.json();
+console.log(JSON.stringify(token, 0, 4));
 
-    console.log(JSON.stringify(token, 0, 4));
+result = await fetch(DISCORD_API_ENDPOINT + "/channels/" + DISCORD_CHANNEL_ID + "/messages?limit=3", {
+    headers: {
+        "Authorization": "Bearer " + token.access_token
+    }
+});
 
-    result = await fetch(DISCORD_API_ENDPOINT + "/channels/" + DISCORD_CHANNEL_ID + "/messages?limit=3", {
-        headers: {
-            "Authorization": "Bearer " + token.access_token
-        }
-    });
+// result = await fetch("https://discordapp.com/api/users/@me/channels", {
+//     headers: {
+//         "Authorization": "Bearer " + token.access_token
+//     }
+// });
 
-    // result = await fetch("https://discordapp.com/api/users/@me/channels", {
-    //     headers: {
-    //         "Authorization": "Bearer " + token.access_token
-    //     }
-    // });
-
- //   https://discord.com/api/oauth2/authorize?client_id=<app_clientid>&scope=bot&permissions=65536
+//   https://discord.com/api/oauth2/authorize?client_id=<app_clientid>&scope=bot&permissions=65536
 
 
-    result = await result.json();
+result = await result.json();
 
-    console.log(JSON.stringify(result, 0, 4));
-
-})();
+console.log(JSON.stringify(result, 0, 4));

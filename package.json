@@ -5,6 +5,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
+    "start": "node app",
+    "develop": "nodemon app",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,6 +20,10 @@
   },
   "homepage": "https://github.com/potpiejimmy/crypto-premium-trader#readme",
   "dependencies": {
-    "@binance/connector": "^1.5.0"
+    "@binance/connector": "^1.5.0",
+    "configstore": "^6.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
   }
 }

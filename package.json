@@ -21,7 +21,8 @@
   "homepage": "https://github.com/potpiejimmy/crypto-premium-trader#readme",
   "dependencies": {
     "@binance/connector": "^1.5.0",
-    "configstore": "^6.0.0"
+    "configstore": "^6.0.0",
+    "express": "^4.17.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
